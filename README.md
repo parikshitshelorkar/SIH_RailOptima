@@ -1,5 +1,5 @@
 # SIH_RailOptima
-(https://github.com/parikshitshelorkar/SIH_RailOptima):
+
 
 ---
 
@@ -30,13 +30,13 @@ RailOptima provides a web-based interface that evaluates train readiness and dis
 
 ## 📁 Project Structure
 
-```
+
 SIH_RailOptima/
 ├── index.html        # Main user interface
 ├── style.css         # Styling rules
 ├── script.js         # Train selection logic
 └── README.md         # Project documentation
-```
+
 
 ---
 
