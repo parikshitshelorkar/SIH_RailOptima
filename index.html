@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RailOptima - Intelligent Rail Asset Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Presentation Mode Toggle -->
+        <button id="presentation-toggle" class="presentation-toggle">
+            <i class="fas fa-desktop"></i> Presentation Mode
+        </button>
+
+        <!-- RailOptima Header -->
+        <div class="railoptima-header">
+            <div class="railoptima-logo">
+                <div class="railoptima-logo-img">
+                    <i class="fas fa-train"></i>
+                </div>
+                <div>
+                    <h1>RailOptima</h1>
+                    <div class="railoptima-tagline">Intelligent Rail Asset Management</div>
+                </div>
+            </div>
+            <div class="header-controls">
+                <div class="time-display" id="current-time">21:30 IST</div>
+                <button id="theme-toggle" class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="qr-scanner" class="qr-scanner-btn">
+                    <i class="fas fa-qrcode"></i>
+                </button>
+                <button id="install-app" class="install-btn">
+                    <i class="fas fa-download"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <h2>Kochi Metro Trainset Induction Planner</h2>
+
+        <!-- Dashboard -->
+        <div class="dashboard">
+            <div class="summary-cards">
+                <div class="card card-sm animated-entry delay-1">
+                    <div class="card-title">
+                        <i class="fas fa-train"></i> Total Trainsets
+                    </div>
+                    <div class="card-value" id="total-trainsets">25</div>
+                </div>
+                <div class="card card-sm animated-entry delay-2">
+                    <div class="card-title">
+                        <i class="fas fa-check-circle"></i> Ready for Service
+                    </div>
+                    <div class="card-value" id="ready-trainsets">18</div>
+                </div>
+                <div class="card card-sm animated-entry delay-3">
+                    <div class="card-title">
+                        <i class="fas fa-tools"></i> Needs Maintenance
+                    </div>
+                    <div class="card-value" id="maintenance-trainsets">5</div>
+                </div>
+                <div class="card card-sm animated-entry delay-4">
+                    <div class="card-title">
+                        <i class="fas fa-pause-circle"></i> On Standby
+                    </div>
+                    <div class="card-value" id="standby-trainsets">2</div>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <!-- Filters -->
+                <div class="filters">
+                    <div class="filter-item">
+                        <label for="depot-filter">Depot</label>
+                        <select id="depot-filter">
+                            <option value="all">All Depots</option>
+                            <option value="aluva">Aluva</option>
+                            <option value="palarivattom">Palarivattom</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label for="status-filter">Status</label>
+                        <select id="status-filter">
+                            <option value="all">All Status</option>
+                            <option value="ready">Ready</option>
+                            <option value="maintenance">Maintenance</option>
+                            <option value="standby">Standby</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label for="fitness-filter">Fitness Certificate</label>
+                        <select id="fitness-filter">
+                            <option value="all">All</option>
+                            <option value="valid">Valid</option>
+                            <option value="expiring">Expiring Soon</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label for="branding-filter">Branding Priority</label>
+                        <select id="branding-filter">
+                            <option value="all">All</option>
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+                    <button id="refresh-data" class="btn btn-primary">
+                        <i class="fas fa-sync-alt"></i> Refresh Data
+                    </button>
+                </div>
+
+                <!-- Trainset Grid -->
+                <div id="trainset-container" class="trainset-grid">
+                    <!-- Trainset cards will be dynamically generated here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature Sections -->
+        <div class="feature-section">
+            <div class="feature-tabs">
+                <div class="feature-tab active" data-tab="maintenance-timeline">
+                    <i class="fas fa-calendar-alt"></i> Predictive Maintenance Analytics
+                </div>
+                <div class="feature-tab" data-tab="depot-map">
+                    <i class="fas fa-map-marked-alt"></i> Trainset Status Overview
+                </div>
+                <div class="feature-tab" data-tab="mileage-trends">
+                    <i class="fas fa-chart-line"></i> Live
+                </div>
+            </div>
+
+            <!-- Maintenance Timeline Content -->
+            <div id="maintenance-timeline-content" class="feature-content active card">
+                <h3><i class="fas fa-brain"></i> Predictive Maintenance Analytics</h3>
+                <p><strong>Next Failure Prediction</strong></p>
+                
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span><strong>TS-05</strong> - Braking system likely to fail within 7 days</span>
+                </div>
+                
+                <p><strong>Optimal Maintenance Window</strong></p>
+                <div class="gantt-chart">
+                    <div class="gantt-container">
+                        <div class="gantt-timescale">
+                            <div class="gantt-time-marker">Mon</div>
+                            <div class="gantt-time-marker">Tue</div>
+                            <div class="gantt-time-marker">Wed</div>
+                            <div class="gantt-time-marker">Thu</div>
+                            <div class="gantt-time-marker">Fri</div>
+                            <div class="gantt-time-marker">Sat</div>
+                            <div class="gantt-time-marker">Sun</div>
+                        </div>
+                        <div class="gantt-row">
+                            <div class="gantt-row-label">TS-01</div>
+                            <div class="gantt-bar-container">
+                                <div class="gantt-bar completed" style="left: 0%; width: 30%;"></div>
+                            </div>
+                        </div>
+                        <div class="gantt-row">
+                            <div class="gantt-row-label">TS-05</div>
+                            <div class="gantt-bar-container">
+                                <div class="gantt-bar planned" style="left: 20%; width: 40%;"></div>
+                            </div>
+                        </div>
+                        <div class="gantt-row">
+                            <div class="gantt-row-label">TS-08</div>
+                            <div class="gantt-bar-container">
+                                <div class="gantt-bar delayed" style="left: 60%; width: 25%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scenario Controls -->
+                <div class="scenario-controls">
+                    <div class="scenario-slider">
+                        <div class="slider-label">
+                            <span>Maintenance Crew Teams:</span>
+                            <span id="crew-value">5 teams</span>
+                        </div>
+                        <input type="range" id="crew-slider" min="3" max="10" value="5">
+                    </div>
+                    <div class="scenario-slider">
+                        <div class="slider-label">
+                            <span>Service Frequency:</span>
+                            <span id="frequency-value">5 mins</span>
+                        </div>
+                        <input type="range" id="frequency-slider" min="3" max="10" value="5">
+                    </div>
+                    <div class="scenario-slider">
+                        <div class="slider-label">
+                            <span>Parts Delivery Time:</span>
+                            <span id="delivery-value">24 hrs</span>
+                        </div>
+                        <input type="range" id="delivery-slider" min="12" max="72" value="24">
+                    </div>
+                </div>
+                
+                <div id="simulation-results" class="scenario-results">
+                    <p>With current parameters, predicted service reliability: <strong>95.2%</strong></p>
+                    <p>Expected maintenance backlog reduction: <strong>15%</strong> in next 7 days</p>
+                    <p>Optimal trainset utilization: <strong>87%</strong></p>
+                </div>
+            </div>
+
+            <!-- Depot Map Content -->
+            <div id="depot-map-content" class="feature-content card">
+                <h3><i class="fas fa-map-marked-alt"></i> Trainset Status Overview</h3>
+                <div class="depot-map">
+                    <div class="depot-zones">
+                        <div class="zone">
+                            <h4>Zone A - Service Ready</h4>
+                            <div class="stabling-bays">
+                                <div class="bay occupied">A-01: TS-12</div>
+                                <div class="bay occupied">A-02: TS-07</div>
+                                <div class="bay occupied">A-09: TS-04</div>
+                                <div class="bay occupied">A-12: TS-01</div>
+                                <div class="bay available">A-05</div>
+                                <div class="bay available">A-08</div>
+                            </div>
+                        </div>
+                        <div class="zone">
+                            <h4>Zone B - Standby</h4>
+                            <div class="stabling-bays">
+                                <div class="bay occupied">B-07: TS-02</div>
+                                <div class="bay occupied">B-11: TS-06</div>
+                                <div class="bay available">B-03</div>
+                                <div class="bay available">B-09</div>
+                            </div>
+                        </div>
+                        <div class="zone">
+                            <h4>Zone C - Cleaning</h4>
+                            <div class="stabling-bays">
+                                <div class="bay occupied">C-03: TS-03</div>
+                                <div class="bay available">C-01</div>
+                                <div class="bay available">C-02</div>
+                                <div class="bay available">C-04</div>
+                            </div>
+                        </div>
+                        <div class="zone">
+                            <h4>IBL - Maintenance</h4>
+                            <div class="stabling-bays">
+                                <div class="bay maintenance">IBL-02: TS-05</div>
+                                <div class="bay available">IBL-01</div>
+                                <div class="bay available">IBL-03</div>
+                                <div class="bay available">IBL-04</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mileage Trends Content -->
+            <div id="mileage-trends-content" class="feature-content card">
+                <h3><i class="fas fa-chart-line"></i> Live</h3>
+                <div class="mileage-chart-container">
+                    <canvas id="mileageChart"></canvas>
+                </div>
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #0057b8;"></div>
+                        <span>This Week</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #00a651;"></div>
+                        <span>Last Week</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #ff7f00;"></div>
+                        <span>Average</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Recommendations Panel -->
+        <div class="recommendation-panel">
+            <div class="panel-header">
+                <h2 class="panel-title">
+                    <i class="fas fa-robot"></i> AI-Powered Induction Recommendations
+                </h2>
+                <button class="btn btn-secondary">Generate New Plan</button>
+            </div>
+            <div class="recommendation-grid">
+                <div class="recommendation-column">
+                    <div class="column-header column-service">
+                        <i class="fas fa-play-circle"></i> Enter Service (6 trainsets)
+                    </div>
+                    <div class="recommendation-item">
+                        <div class="item-header">
+                            <span class="item-title">TS-01</span>
+                            <span class="item-score">98%</span>
+                        </div>
+                        <div class="item-reason">Excellent fitness, high branding priority</div>
+                    </div>
+                    <div class="recommendation-item">
+                        <div class="item-header">
+                            <span class="item-title">TS-02</span>
+                            <span class="item-score">95%</span>
+                        </div>
+                        <div class="item-reason">Good condition, balanced mileage</div>
+                    </div>
+                    <div class="recommendation-item">
+                        <div class="item-header">
+                            <span class="item-title">TS-03</span>
+                            <span class="item-score">92%</span>
+                        </div>
+                        <div class="item-reason">Ready after cleaning completion</div>
+                    </div>
+                </div>
+                
+                <div class="recommendation-column">
+                    <div class="column-header column-standby">
+                        <i class="fas fa-pause-circle"></i> Keep on Standby (2 trainsets)
+                    </div>
+                    <div class="recommendation-item">
+                        <div class="item-header">
+                            <span class="item-title">TS-04</span>
+                            <span class="item-score">75%</span>
+                        </div>
+                        <div class="item-reason">High mileage, suitable for backup</div>
+                    </div>
+                    <div class="recommendation-item">
+                        <div class="item-header">
+                            <span class="item-title">TS-06</span>
+                            <span class="item-score">72%</span>
+                        </div>
+                        <div class="item-reason">Recent service, low priority branding</div>
+                    </div>
+                </div>
+                
+                <div class="recommendation-column">
+                    <div class="column-header column-ibl">
+                        <i class="fas fa-tools"></i> Send to IBL (1 trainset)
+                    </div>
+                    <div class="recommendation-item">
+                        <div class="item-header">
+                            <span class="item-title">TS-05</span>
+                            <span class="item-score">45%</span>
+                        </div>
+                        <div class="item-reason">Critical telecom issues, open job card</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Voice Command Button -->
+    <button id="voice-command" class="voice-command">
+        <i class="fas fa-microphone"></i>
+    </button>
+
+    <!-- AR View Button -->
+    <button id="ar-view" class="ar-view">
+        <i class="fas fa-cube"></i>
+    </button>
+
+    <!-- QR Scanner Modal -->
+    <div id="qr-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">QR Code Scanner</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="scan-area">
+                <video id="qr-video" autoplay muted></video>
+            </div>
+            <div id="qr-result"></div>
+        </div>
+    </div>
+
+    <!-- AR Modal -->
+    <div id="ar-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">AR Depot View</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div style="text-align: center; padding: 20px;">
+                <i class="fas fa-cube" style="font-size: 48px; color: var(--primary); margin-bottom: 15px;"></i>
+                <p>AR view would display 3D depot layout with real-time trainset positions</p>
+                <p style="color: var(--gray); font-size: 14px;">Feature requires WebXR-compatible device</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Offline Indicator -->
+    <div id="offline-indicator" class="offline-indicator">
+        <i class="fas fa-wifi"></i> You're offline. Data may not be current.
+    </div>
+
+    <!-- Install Prompt -->
+    <div id="install-prompt" class="install-prompt">
+        <p><strong>Install RailOptima</strong></p>
+        <p>Add this app to your home screen for quick access</p>
+        <div class="install-actions">
+            <button id="install-yes" class="btn btn-primary">Install</button>
+            <button id="install-no" class="btn">Not now</button>
+        </div>
+    </div>
+
+    <!-- Notification Permission -->
+    <div id="notification-permission" class="notification-permission">
+        <p>Enable notifications to receive maintenance alerts</p>
+        <button id="enable-notifications" class="btn btn-primary">Enable</button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
